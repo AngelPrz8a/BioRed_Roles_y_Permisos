@@ -125,7 +125,6 @@ flowchart BT
 | | Ver módulos de otros usuarios o grupos una vez aprobada su solicitud de acceso. |
 | Solicitudes | Solicitar acceso para visualizar los módulos de ciertos usuarios o grupos. |
 | | Solicitar el cambio de rol a Coordinador. |
-| Grupos | Crear uno o varios grupos de trabajo y quedar como Coordinador de cada grupo que crea. |
 | Gestión de módulos | Agregar módulos propios y definir su visibilidad (público, solo identificados, grupo o privado). |
 | | Modificar la configuración de sus módulos propios. |
 | Visualizaciones | Crear y modificar visualizaciones (paneles, gráficas) sobre los módulos a los que tiene acceso. |
@@ -136,6 +135,7 @@ Identificado que coordina uno o más grupos. **Hereda todos los permisos del usu
 
 | Categoría | Permisos |
 |---|---|
+| Grupos | Crear uno o varios grupos de trabajo. |
 | Gestión de su grupo | Definir la visibilidad del grupo (público, solo identificados o privado). |
 | Solicitudes de su grupo | Aprobar o rechazar solicitudes de acceso a los módulos de su grupo. |
 | | Aprobar o rechazar solicitudes de ingreso a su grupo. |
@@ -175,5 +175,3 @@ Identificado que coordina uno o más grupos. **Hereda todos los permisos del usu
 | Público | Cualquier persona. |
 | Solo identificados | Usuarios con sesión iniciada. |
 | Privado | Solo sus miembros. |
-
-> **Nota:** las definiciones de "quién puede verlo" son una interpretación de la tabla de permisos. Ajústalas si las reglas reales del sistema difieren.
