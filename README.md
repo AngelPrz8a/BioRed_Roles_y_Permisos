@@ -25,9 +25,12 @@ Cada rol **hereda todos los permisos** del rol anterior y agrega los propios.
 
 ```mermaid
 flowchart LR
-    UP["👤 Usuario particular"] --> UI["🔐 Usuario identificado"]
-    UI --> CO["🧑‍🏫 Coordinador"]
-    CO --> AD["🛡️ Administrador"]
+    UP["👤 Usuario particular"] 
+    UI["🔐 Usuario identificado"]
+    CO["🧑‍🏫 Coordinador"]
+    AD["🛡️ Administrador"]
+
+	AD-->CO-->UI-->UP
 
     style UP fill:#f6f8fa,stroke:#8c959f,color:#1f2328
     style UI fill:#ddf4ff,stroke:#0969da,color:#1f2328
