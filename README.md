@@ -39,9 +39,6 @@ flowchart LR
 
 ## Diagrama completo de permisos
 
-<details>
-<summary><b>Ver diagrama completo</b> (clic para desplegar)</summary>
-
 ```mermaid
 flowchart BT
     classDef rol fill:#1f6feb,stroke:#0b3d91,color:#fff,font-weight:bold
