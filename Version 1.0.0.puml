@@ -1,0 +1,86 @@
+@startuml
+top to bottom direction
+skinparam shadowing false
+skinparam actorStyle awesome
+skinparam packageStyle rectangle
+skinparam nodesep 15
+skinparam ranksep 25
+skinparam usecase {
+  BackgroundColor #FDFDFD
+  BorderColor #555555
+}
+
+' Fila de actores: más permisos (izquierda) -> menos permisos (derecha)
+actor "Administrador" as AD
+actor "Coordinador" as CO
+actor "Usuario\nidentificado" as UI
+actor "Usuario particular\n(sin sesión)" as UP
+
+AD -right-|> CO
+CO -right-|> UI
+UI -right-|> UP
+
+rectangle "Sistema de módulos" {
+
+  rectangle "Administración global" as PAD {
+    usecase "Gestionar cuentas\n(activar, suspender,\nasignar a grupos)" as U1
+    usecase "Asignar rol Coordinador\ny etiquetas" as R1
+    usecase "Aprobar/rechazar cambio\nde rol a Coordinador" as R2
+    usecase "Aprobar solicitudes de acceso\na módulos de cualquier grupo" as AC1
+    usecase "Definir visibilidad y modificar\nmódulos de cualquier grupo" as G3
+    usecase "Consultar auditoría completa\n(quién, qué, cuándo)" as AU1
+  }
+
+  rectangle "Gestión de su grupo" as PCO {
+    usecase "Definir visibilidad\nde su grupo" as CG1
+    usecase "Aprobar/rechazar ingreso\ny acceso a módulos del grupo" as CG2
+    usecase "Consultar registro de\ncambios de su grupo" as CG3
+  }
+
+  rectangle "Usuario identificado" as PUI {
+    usecase "Crear grupos\n(queda como Coordinador)" as G1
+    usecase "Gestionar módulos propios\n(crear, configurar, visibilidad)" as M1
+    usecase "Crear/modificar\nvisualizaciones" as VZ1
+    usecase "Solicitar acceso a módulos\no cambio de rol" as S1
+    usecase "Ver módulos identificados,\nde sus grupos y aprobados" as V2
+  }
+
+  rectangle "Acceso público" as PUP {
+    usecase "Ver módulos públicos" as V1
+    usecase "Registrarse" as A1
+  }
+}
+
+' Cada actor queda sobre su columna
+AD -down-> PAD
+CO -down-> PCO
+UI -down-> PUI
+UP -down-> PUP
+
+' Columnas en fila, de izquierda a derecha
+PAD -[hidden]right- PCO
+PCO -[hidden]right- PUI
+PUI -[hidden]right- PUP
+
+' Casos de uso apilados verticalmente dentro de cada columna
+U1 -[hidden]down- R1
+R1 -[hidden]down- R2
+R2 -[hidden]down- AC1
+AC1 -[hidden]down- G3
+G3 -[hidden]down- AU1
+
+CG1 -[hidden]down- CG2
+CG2 -[hidden]down- CG3
+
+G1 -[hidden]down- M1
+M1 -[hidden]down- VZ1
+VZ1 -[hidden]down- S1
+S1 -[hidden]down- V2
+
+V1 -[hidden]down- A1
+
+note bottom of AD
+  Alcance sobre todo el sistema.
+  Hereda los permisos de los demás roles.
+end note
+@enduml
