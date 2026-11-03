@@ -39,69 +39,10 @@ flowchart LR
 
 ## Diagrama completo de permisos
 
-```mermaid
-flowchart BT
-    classDef rol fill:#1f6feb,stroke:#0b3d91,color:#fff,font-weight:bold
-    classDef cat fill:#f6f8fa,stroke:#8c959f,color:#1f2328,text-align:left
+![Diagrama de casos de uso: roles y permisos del sistema de módulos](https://www.plantuml.com/plantuml/png/XLQnRXmt4EttAmPA4HiusT0PRb8OlfnWnONXWmIfI2x5t79kHOXBhZXB2PBZZt7f8fMxjFTZ6PAh3RMdG18ME0w7RsRUFCxkU-xHzw4rLUyww1riND-x5fJsLFVQsOgljEtGOmjyYShTQjl05WrJiODrx_nPVsS8y9ROjULcX_KLDfIt8ohQnfGErYbYwk3eRM7qQA-YSLuQ0rEDJF2b0lXLO1llWbLBPvo7dpuSn_-uuxmYFrZVfh_gQrNz31-qGL2KqoN-1ThTDuQEVAlPCRpGzzT1arVu4WxVGKlMbRk2IVKblgpISJXOg5PRpRqNLlm18CFY-65lwIG7RSUTvUU7dNCEwBLRMwt8zdghQt5AFkSV9puWHVUw3WRzshvWRO69zUw7VPdzLrMrE8P3hvlB_l2lTp78ydEn5i3pZ-LQ3epymy6Pv4vj8gJT_L31E3uGPYk0qQaiiewHeJ5kWoR5Nqdms0WOst9mGXmrWnxg8DKXIzvIaxv1FmCEt94L5cThYwoRw8RG-D0v7YewUWot6BoyCr0mkhPtGBs-3YGHqi7JwS7EIvh-TMhOVKm7sqqaNL42mn8k8yoVH01sHjUw3ueuAwSc5XmSAOlMEg19oidLP2qi9paTqrQOz72ZMM-qqGeLt47hLDA05FKSuicRnu1BPpcOFh8ObEwTt_sDKBksCyAB42_dTz_j3Ax3xljC47VVh7APw4LY-kkarwbxiScAW4CHUIMo-l9iDMixFRSyUQulsZO-4NetK0kFc3MFmER_Lx-d9ahKoOcrpQrcs4_cpNxDurNRkuqhkJgJcfUUS6W89tv99S9TgQPCS57uv6ACrGaLdKv0TSIL3ZcxrKtmyhkaDGD-EdeYbzU5UkH4GAFliPOubA_5nU-JKsTPpUZtsLvRDzmIo9Sa8PnD02wegA3aZ6T3-taW2AIZgTlA3SdCdw1_aTFeTlzi9BC7vbSbyzEme_C0EydmD6i1FLEMUbPwclzBL9Y7F-JciTlu99FQcT1QJFDKkLjx-2wEjpXEnwLCLv74k8p3TLKiLob0Xc4W2rjjS1Qv7DygW32yGwfL3FJ7fLP2uPzvGAS8ykpR9PGyK_iO4pchFSH-Tjf4nk66ugi3JIij8jcr-Ng0z0h7Qi-F_WDDXSH1Uhfld5UdywanpZTvfcQvP2TlfiOuRghboTGvNMbvzim2KkrxonNuD3KcYSipDOjkp_PzvrLriMSLWLJMzVJmvUEs89q7M9WQRKs3Hdgd7901pY_DL-Bm6_ce8LD-92XAQqNfoy8xG_og8giWHgZUow_Gcdy1)
 
-    subgraph UP["👤 Usuario particular (sin inicio de sesión)"]
-        direction TB
-        UP_R["Usuario particular"]:::rol
-        UP_V["<b>Visualización</b><br/>• Ver módulos públicos"]:::cat
-        UP_A["<b>Acceso</b><br/>• Registrarse como usuario identificado"]:::cat
-        UP_R --- UP_V
-        UP_R --- UP_A
-    end
+> Los roles están ordenados de izquierda a derecha, del que tiene más permisos al que tiene menos. Cada rol hereda los permisos del que está a su derecha.
 
-    subgraph UI["🔐 Usuario identificado (con inicio de sesión)"]
-        direction TB
-        UI_R["Usuario identificado"]:::rol
-        UI_V["<b>Visualización</b><br/>• Ver módulos públicos<br/>• Ver módulos solo para identificados<br/>• Ver módulos de sus grupos<br/>• Ver módulos de otros (solicitud aprobada)"]:::cat
-        UI_S["<b>Solicitudes</b><br/>• Solicitar acceso a módulos de usuarios o grupos<br/>• Solicitar cambio de rol a Coordinador"]:::cat
-        UI_G["<b>Grupos</b><br/>• Crear grupos de trabajo<br/>• Queda como Coordinador de cada grupo creado"]:::cat
-        UI_M["<b>Gestión de módulos</b><br/>• Agregar módulos propios y definir visibilidad<br/>&nbsp;&nbsp;(público, identificados, grupo, privado)<br/>• Modificar configuración de sus módulos"]:::cat
-        UI_Z["<b>Visualizaciones</b><br/>• Crear y modificar paneles y gráficas<br/>&nbsp;&nbsp;sobre los módulos a los que tiene acceso"]:::cat
-        UI_R --- UI_V
-        UI_R --- UI_S
-        UI_R --- UI_G
-        UI_R --- UI_M
-        UI_R --- UI_Z
-    end
-
-    subgraph CO["🧑‍🏫 Coordinador (coordina uno o más grupos)"]
-        direction TB
-        CO_R["Coordinador"]:::rol
-        CO_G["<b>Gestión de su grupo</b><br/>• Definir visibilidad del grupo<br/>&nbsp;&nbsp;(público, identificados, privado)"]:::cat
-        CO_S["<b>Solicitudes de su grupo</b><br/>• Aprobar/rechazar acceso a módulos del grupo<br/>• Aprobar/rechazar ingreso al grupo"]:::cat
-        CO_A["<b>Auditoría de su grupo</b><br/>• Consultar registro de cambios de configuración"]:::cat
-        CO_R --- CO_G
-        CO_R --- CO_S
-        CO_R --- CO_A
-    end
-
-    subgraph AD["🛡️ Administrador (alcance: todo el sistema)"]
-        direction TB
-        AD_R["Administrador"]:::rol
-        AD_G["<b>Grupos</b><br/>• Crear grupos de trabajo<br/>&nbsp;&nbsp;(Semillero BioRed, Semillero aliado, Independientes)<br/>• Definir visibilidad de cualquier grupo"]:::cat
-        AD_RE["<b>Roles y etiquetas</b><br/>• Aprobar/rechazar cambio de rol a Coordinador<br/>• Asignar rol de Coordinador directamente<br/>• Asignar etiquetas a personas<br/>&nbsp;&nbsp;(Estudiante de semillero, Profesor aliado)"]:::cat
-        AD_AC["<b>Accesos</b><br/>• Aprobar/rechazar acceso a módulos de cualquier grupo"]:::cat
-        AD_M["<b>Módulos</b><br/>• Modificar configuración de módulos ajenos"]:::cat
-        AD_U["<b>Usuarios</b><br/>• Activar y suspender cuentas<br/>• Asignar usuarios a grupos"]:::cat
-        AD_AU["<b>Auditoría</b><br/>• Consultar registro completo (quién, qué, cuándo)"]:::cat
-        AD_R --- AD_G
-        AD_R --- AD_RE
-        AD_R --- AD_AC
-        AD_R --- AD_M
-        AD_R --- AD_U
-        AD_R --- AD_AU
-    end
-
-    UI_R -. "hereda de" .-> UP_R
-    CO_R -. "hereda de" .-> UI_R
-    AD_R -. "hereda de" .-> CO_R
-```
-
-</details>
 
 ## Detalle por rol
 
